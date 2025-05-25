@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//     let word = "madam"; 
+// let reversed = "";
+
+// 
+// for (let i = word.length - 1; i >= 0; i--) {
+//     reversed += word[i];
+// }
+
+// 
+// if (word === reversed) {
+//     console.log("It's a palindrome.");
+// } else {
+//     console.log("It's not a palindrome.");
+// }
+
+let word = prompt("Entre your word");  
+let isPalindrome = true;
+
+// Loop from both ends toward the center
+for (let i = 0; i < word.length / 2; i++) {
+    if (word[i] !== word[word.length - 1 - i]) {
+        isPalindrome = false;
+        break;
+    }
+}
+
+// Final result
+if (isPalindrome) {
+    console.log( word   +  ': '+ "It's a palindrome word.");
+} else {
+    console.log( word    +  ' : ' +"It's not a palindrome word.");
+}
+
+</script>
+</body>
+</html>

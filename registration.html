@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Registration & Login with Cards</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #4f46e5;
+      color: white;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #4338ca;
+    }
+
+    #message {
+      font-size: 16px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    hr {
+      border: none;
+      border-top: 2px solid #e0e0e0;
+      width: 100%;
+      max-width: 400px;
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>User Registration</h2>
+  <form id="registerForm">
+    <label>Name:</label>
+    <input type="text" id="regName" required>
+
+    <label>Age:</label>
+    <input type="number" id="regAge" required>
+
+    <label>Gender:</label>
+    <select id="regGender" required>
+      <option value="">Select</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label>Email ID:</label>
+    <input type="email" id="regEmail" required>
+
+    <label>Password:</label>
+    <input type="password" id="regPassword" required>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <hr>
+
+  <h2>User Login</h2>
+  <form id="loginForm">
+    <label>Email ID:</label>
+    <input type="email" id="loginEmail" required>
+
+    <label>Password:</label>
+    <input type="password" id="loginPassword" required>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <h3 id="message"></h3>
+
+  <div class="card-container" id="cardContainer"></div>
+
+  <script>
+    // Show alert messages
+    function showMessage(msg, color) {
+      const message = document.getElementById("message");
+      message.textContent = msg;
+      message.style.color = color;
+    }
+
+    // Render all login cards from localStorage
+    function loadLoginCards() {
+      const container = document.getElementById("cardContainer");
+      container.innerHTML = "";
+      const logins = JSON.parse(localStorage.getItem("loginCards") || "[]");
+      logins.forEach(user => createCard(user));
+    }
+
+    // Create and display user card
+    function createCard(user) {
+      const container = document.getElementById("cardContainer");
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h4>${user.name}</h4>
+        <p><strong>Age:</strong> ${user.age}</p>
+        <p><strong>Gender:</strong> ${user.gender}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+      `;
+      container.appendChild(card);
+    }
+
+    // Registration
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const user = {
+        name: document.getElementById("regName").value,
+        age: document.getElementById("regAge").value,
+        gender: document.getElementById("regGender").value,
+        email: document.getElementById("regEmail").value,
+        password: document.getElementById("regPassword").value
+      };
+
+      if (localStorage.getItem(user.email)) {
+        alert("User already registered. Please login.");
+      } else {
+        localStorage.setItem(user.email, JSON.stringify(user));
+        showMessage("Registration successful. You can now login.", "green");
+      }
+
+      document.getElementById("registerForm").reset();
+    });
+
+    // Login
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      const storedUser = localStorage.getItem(email);
+
+      if (!storedUser) {
+        showMessage("User not registered. Please register first.", "red");
+      } else {
+        const user = JSON.parse(storedUser);
+        if (user.password === password) {
+          showMessage(`Login successful. Welcome, ${user.name}!`, "green");
+
+          // Save to loginCards array
+          let cards = JSON.parse(localStorage.getItem("loginCards") || "[]");
+          cards.push(user);
+          localStorage.setItem("loginCards", JSON.stringify(cards));
+
+          createCard(user);
+        } else {
+          showMessage("Incorrect password.", "red");
+        }
+      }
+
+      document.getElementById("loginForm").reset();
+    });
+
+    // Load existing login cards on page load
+    window.onload = loadLoginCards;
+  </script>
+</body>
+</html>
+

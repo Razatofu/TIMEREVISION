@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  button{
+        width: 200px;
+        height: 100px;
+        border-radius: 10px;
+        color: aqua;
+    }
+    button:hover{
+        color: blue;
+        background-color: chartreuse;
+    }
+</style>
+<body>
+  <button><a href="index.html">back to home</a></button>
+    <script>
+        let paragraph = prompt("Enter a paragraph:");
+        console.log(paragraph);
+        
+let wordToFind = prompt("Enter the word to find:");
+console.log(wordToFind);
+
+let wordToReplace = prompt("Enter the word to replace it with:");
+console.log(wordToReplace);
+
+
+let words = paragraph.split(" ");
+let newParagraph = "";
+
+let matchFound = false;
+// document.write(paragraph);
+// document.write(wordToFind);
+// document.write(wordToReplace);
+
+for (let i = 0; i < words.length; i++) {
+  if (words[i] === wordToFind) {
+    newParagraph += wordToReplace + " ";
+    matchFound = true;
+  } else {
+    newParagraph += words[i] + " ";
+  }
+}
+
+if (matchFound) {
+  alert("Match found!");
+  console.log("Updated paragraph:");
+  console.log(newParagraph.trim());
+} else {
+  alert("No match found.");
+}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Take input from user
+let paragraph = prompt("Enter a paragraph:");
+let word = "";
+let longestWord = "";
+let maxLength = 0;
+
+// Loop through each character in the paragraph
+for (let i = 0; i <= paragraph.length; i++) {
+    let char = paragraph[i];
+
+    // Check if character is a space or end of text
+    if (char === ' ' || i === paragraph.length) {
+        // Check if the current word is the longest
+        if (word.length > maxLength) {
+            maxLength = word.length;
+            longestWord = word;
+        }
+        word = ""; // Reset word
+    } else {
+        word = word + char; // Build the current word
+    }
+}
+
+// Show result
+console.log("The longest word is: " + longestWord);
+console.log("Length of the word: " + maxLength);
+
+    </script>
+</body>
+</html>
+
+
+<!-- 
+// Take input from user
+let paragraph = prompt("Enter a paragraph:");
+
+// Remove punctuation (optional) and split into words
+let words = paragraph.split(" ");
+
+// Initialize longest word
+let longestWord = "";
+let maxLength = 0;
+
+// Loop through the words
+for (let i = 0; i < words.length; i++) { 
+    if (words[i].length > maxLength) {
+        longestWord = words[i];
+        maxLength = words[i].length;
+    }
+}
+
+// Show result
+console.log("The longest word is: " + longestWord);
+console.log("Length of the word: " + maxLength); -->

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Current Date & Time Tasks (Without padStart)</title>
+</head>
+<body>
+
+<h2>Current Date & Time Display</h2>
+
+<button onclick="showFullDateTime()">Show Full Date & Time</button>
+<p id="datetime"></p>
+
+<button onclick="showOnlyDate()">Show Only Date (DD/MM/YYYY)</button>
+<p id="onlyDate"></p>
+
+<button onclick="showOnlyTime()">Show Only Time (HH:MM:SS)</button>
+<p id="onlyTime"></p>
+
+<script>
+  function Clock(value) {
+    return (value < 10 ? '0' + value : value);
+  }
+
+  function showFullDateTime() {
+    const now = new Date();
+    document.getElementById("datetime").innerText = now.toString();
+  }
+
+  function showOnlyDate() {
+    const now = new Date();
+    const day = Clock(now.getDate());
+    const month = Clock(now.getMonth() + 1);
+    const year = now.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+    document.getElementById("onlyDate").innerText = formattedDate;
+  }
+
+  function showOnlyTime() {
+    const now = new Date();
+    const hours = Clock(now.getHours());
+    const minutes = Clock(now.getMinutes());
+    const seconds = Clock(now.getSeconds());
+    const formattedTime = `${hours}:${minutes}:${seconds}`;
+    document.getElementById("onlyTime").innerText = formattedTime;
+  }
+</script>
+
+</body>
+</html>

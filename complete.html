@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Step 1: 6 names wali string create karo
+let names = prompt("enter name seprated with comma");
+
+// Step 2: Name dhoondho (e.g., "sara")
+let targetName = "sara";
+let newName = "sana";
+
+let nameList = ""; // ismein hum updated names dalenge
+let temp = "";     // temporary string banane ke liye
+
+// Step 3: Manual split aur replace (methods ke bina)
+for (let i = 0; i <= names.length; i++) {
+    if (names[i] === "," || i === names.length) {
+        // Check if temp matches targetName
+        if (temp === targetName) {
+            temp = newName; // replace it
+        }
+
+        // Capitalize first letter
+        let capitalized = "";
+        for (let j = 0; j < temp.length; j++) {
+            if (j === 0 && temp[j] >= 'a' && temp[j] <= 'z') {
+                capitalized += String.fromCharCode(temp[j].charCodeAt(0) - 32);
+            } else {
+                capitalized += temp[j];
+            }
+        }
+
+        // Add to final list
+        nameList += capitalized;
+        if (i !== names.length) {
+            nameList += ",";
+        }
+
+        // Print name and its length
+        console.log("Name:", capitalized, "| Length:", capitalized.length);
+
+        // Reset temp
+        temp = "";
+    } else {
+        temp += names[i];
+    }
+}
+
+    </script>
+</body>
+</html>

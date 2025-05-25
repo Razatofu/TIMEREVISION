@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let userInput = prompt("Enter numbers separated by commas:");
+
+let numbers = userInput.split(',');
+
+let evenNumbers = [];
+let oddNumbers = [];
+
+
+for (let i = 0; i < numbers.length; i++) {
+    let entreNumber = Number(numbers[i]);  
+    // console.log(entreNumber);
+    
+
+    
+    if (entreNumber % 2 === 0) {
+        evenNumbers.push(entreNumber);  
+    } else {
+        oddNumbers.push(entreNumber);  
+    }
+}
+
+
+console.log("Even numbers: " + evenNumbers);
+console.log("Odd numbers: " + oddNumbers);
+    </script>
+</body>
+</html>
