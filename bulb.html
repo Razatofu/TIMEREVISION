@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bulb Toggle</title>
+  <style>
+    body {
+      text-align: center;
+      margin-top: 50px;
+      font-family: Arial;
+    }
+
+    #toggleButton {
+      padding: 10px 20px;
+      font-size: 20px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    #bulbImage {
+      width: 150px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <img id="bulbImage" src="blubOFF.jpg" alt="Bulb">
+  <br>
+  <button id="toggleButton">OFF</button>
+
+  <script>
+    const button = document.getElementById("toggleButton");
+    const bulbImage = document.getElementById("bulbImage");
+
+    let isOn = false;
+
+    button.addEventListener("click", function () {
+      isOn = !isOn;
+
+      if (isOn) {
+        bulbImage.src = "blubON.jpg";   
+        button.textContent = "ON";
+        button.style.backgroundColor = "green";
+        button.style.color = "white";
+      } else {
+        bulbImage.src = "blubOFF.jpg";  
+        button.textContent = "OFF";
+        button.style.backgroundColor = "red";
+        button.style.color = "white";
+      }
+    });
+  </script>
+
+</body>
+</html>
